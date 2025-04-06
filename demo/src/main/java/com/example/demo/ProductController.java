@@ -82,3 +82,28 @@ public class ProductController {
         productRepository.delete(product);
     }
 }
+
+/*
+ * Usos en CURL
+ * 
+ * # Obtener todos los productos
+ * curl -X GET http://localhost:8080/api/products
+ * 
+ * # Obtener un producto por ID
+ * curl -X GET http://localhost:8080/api/products/id
+ * 
+ * # Crear un nuevo producto
+ * curl -X POST -H "Content-Type: application/json" -d '{"name":"Producto 1", "price": 10.0, "stock": 100}' http://localhost:8080/api/products
+ * 
+ * # Actualizar un producto existente
+ * curl -X PUT -H "Content-Type: application/json" -d '{"name":"Producto 1 actualizado", "price": 15.0, "stock": 50}' http://localhost:8080/api/products/id
+ * 
+ * # Actualizar el stock de un producto
+ * curl -X PATCH -H "Content-Type: application/json" -d '{"kilos": 10}' http://localhost:8080/api/products/id/stock
+ * 
+ * # Eliminar un producto por ID
+ * curl -X DELETE http://localhost:8080/api/products/id
+ * 
+ * # Eliminar todos los productos
+ * curl -X DELETE http://localhost:8080/api/products
+ */

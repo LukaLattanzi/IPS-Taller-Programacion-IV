@@ -20,4 +20,8 @@ public class Product {
     private String name;
     private double price;
     private double stock;
+
+    // Constructor vacío requerido por JPA para crear instancias de la entidad.
+    public Product() {
+    }
 }
