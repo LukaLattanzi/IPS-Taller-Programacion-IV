@@ -1,27 +1,39 @@
 package com.example.demo;
 
-// Importa las anotaciones de JPA necesarias para mapear esta clase como una entidad en la base de datos.
-import jakarta.persistence.Entity; // Indica que esta clase es una entidad JPA y se mapeará a una tabla en la base de datos.
-import jakarta.persistence.GeneratedValue; // Permite la generación automática del valor del ID.
-import jakarta.persistence.GenerationType; // Especifica la estrategia de generación del ID (por ejemplo, AUTO_INCREMENT).
-import jakarta.persistence.Id; // Marca el atributo como clave primaria de la tabla.
+import java.math.BigDecimal;
 
-// Importa las anotaciones de Lombok para reducir el código boilerplate.
-import lombok.AllArgsConstructor; // Genera automáticamente un constructor con todos los atributos de la clase.
-import lombok.Data; // Genera automáticamente los métodos getter, setter, toString, equals y hashCode.
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
-@AllArgsConstructor
+@Table(name = "Productos") // Nombre exacto de la tabla en MySQL
 @Data
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "producto_id")
     private Long id;
-    private String name;
-    private double price;
-    private double stock;
 
-    // Constructor vacío requerido por JPA para crear instancias de la entidad.
-    public Product() {
-    }
+    @Column(name = "nombre", nullable = false)
+    private String name;
+
+    @Column(name = "descripcion", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "precio_unitario", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "stock_actual", nullable = false)
+    private Integer stock;
+
+    @Column(name = "stock_minimo", nullable = false)
+    private Integer minStock = 5;
+
+    @Column(name = "fecha_creacion", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+    private String creationDate; // Usar String o LocalDateTime según necesidad
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "FK_producto_categoria"))
+    private Category category;
 }
