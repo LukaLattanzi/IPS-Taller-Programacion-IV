@@ -1,7 +1,9 @@
-package com.example.demo;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Categorias")
@@ -18,4 +20,7 @@ public class Category {
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 }

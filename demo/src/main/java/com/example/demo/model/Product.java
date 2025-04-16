@@ -1,12 +1,12 @@
-package com.example.demo;
-
-import java.math.BigDecimal;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Entity
-@Table(name = "Productos") // Nombre exacto de la tabla en MySQL
+@Table(name = "Productos")
 @Data
 public class Product {
 
@@ -30,8 +30,8 @@ public class Product {
     @Column(name = "stock_minimo", nullable = false)
     private Integer minStock = 5;
 
-    @Column(name = "fecha_creacion", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
-    private String creationDate; // Usar String o LocalDateTime según necesidad
+    @Column(name = "fecha_creacion", insertable = false, updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private String creationDate;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "FK_producto_categoria"))
