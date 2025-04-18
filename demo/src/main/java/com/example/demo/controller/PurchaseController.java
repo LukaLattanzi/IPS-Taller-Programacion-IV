@@ -43,4 +43,9 @@ public class PurchaseController {
     public void deletePurchase(@PathVariable Long id) {
         purchaseRepository.deleteById(id);
     }
+
+    @DeleteMapping
+    public void deleteAllPurchases() {
+        purchaseRepository.deleteAll();
+    }
 }

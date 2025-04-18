@@ -45,4 +45,9 @@ public class ClientController {
     public void deleteClient(@PathVariable Long id) {
         clientRepository.deleteById(id);
     }
+
+    @DeleteMapping
+    public void deleteAllClients() {
+        clientRepository.deleteAll();
+    }
 }

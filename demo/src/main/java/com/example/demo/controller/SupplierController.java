@@ -44,4 +44,9 @@ public class SupplierController {
     public void deleteSupplier(@PathVariable Long id) {
         supplierRepository.deleteById(id);
     }
+
+    @DeleteMapping
+    public void deleteAllSuppliers() {
+        supplierRepository.deleteAll();
+    }
 }

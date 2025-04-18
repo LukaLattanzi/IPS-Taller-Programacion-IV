@@ -43,4 +43,9 @@ public class OrderController {
     public void deleteOrder(@PathVariable Long id) {
         orderRepository.deleteById(id);
     }
+
+    @DeleteMapping
+    public void deleteAllOrders() {
+        orderRepository.deleteAll();
+    }
 }

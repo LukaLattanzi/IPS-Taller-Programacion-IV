@@ -33,4 +33,9 @@ public class OrderDetailController {
     public void deleteOrderDetail(@PathVariable Long id) {
         orderDetailRepository.deleteById(id);
     }
+
+    @DeleteMapping
+    public void deleteAllOrderDetails() {
+        orderDetailRepository.deleteAll();
+    }
 }
