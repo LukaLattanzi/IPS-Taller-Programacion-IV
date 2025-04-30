@@ -22,7 +22,7 @@ curl -X POST http://localhost:8080/api/categories \
     "name": "{nombre_categoria}",
     "description": "{descripcion}"
   }'
-```
+``` 
 
 ### Eliminar una categoría por ID
 ```bash
