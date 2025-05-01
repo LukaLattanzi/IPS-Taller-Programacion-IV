@@ -14,16 +14,20 @@
         <!-- Navegación por pestañas -->
         <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos"
-                    type="button" role="tab" aria-controls="productos" aria-selected="true">Productos</button>
-            </li>
-            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="categorias-tab" data-bs-toggle="tab" data-bs-target="#categorias"
                     type="button" role="tab" aria-controls="categorias" aria-selected="false">Categorías</button>
             </li>
             <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos"
+                    type="button" role="tab" aria-controls="productos" aria-selected="true">Productos</button>
+            </li>
+            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes" type="button"
                     role="tab" aria-controls="clientes" aria-selected="false">Clientes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="proveedores-tab" data-bs-toggle="tab" data-bs-target="#proveedores"
+                    type="button" role="tab" aria-controls="proveedores" aria-selected="false">Proveedores</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="compras-tab" data-bs-toggle="tab" data-bs-target="#compras" type="button"
@@ -41,6 +45,27 @@
 
         <!-- Contenido de las pestañas -->
         <div class="tab-content mt-4" id="dashboardTabsContent">
+            <!-- Categorías -->
+            <div class="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
+                <h2>Categorías</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cat : ${categories}">
+                            <td th:text="${cat.id}">1</td>
+                            <td th:text="${cat.name}">Nombre</td>
+                            <td th:text="${cat.description}">Descripción</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <!-- Productos -->
             <div class="tab-pane fade show active" id="productos" role="tabpanel" aria-labelledby="productos-tab">
                 <h2>Productos</h2>
@@ -68,27 +93,6 @@
                 </table>
             </div>
 
-            <!-- Categorías -->
-            <div class="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
-                <h2>Categorías</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="cat : ${categories}">
-                            <td th:text="${cat.id}">1</td>
-                            <td th:text="${cat.name}">Nombre</td>
-                            <td th:text="${cat.description}">Descripción</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
             <!-- Clientes -->
             <div class="tab-pane fade" id="clientes" role="tabpanel" aria-labelledby="clientes-tab">
                 <h2>Clientes</h2>
@@ -107,6 +111,31 @@
                             <td th:text="${client.name}">Nombre</td>
                             <td th:text="${client.email}">Email</td>
                             <td th:text="${client.phone}">Teléfono</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Proveedores -->
+            <div class="tab-pane fade" id="proveedores" role="tabpanel" aria-labelledby="proveedores-tab">
+                <h2>Proveedores</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre de la Empresa</th>
+                            <th>Nombre del Contacto</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="proveedor : ${suppliers}">
+                            <td th:text="${proveedor.id}">1</td>
+                            <td th:text="${proveedor.companyName}">Nombre de la Empresa</td>
+                            <td th:text="${proveedor.contactName}">Nombre del Contacto</td>
+                            <td th:text="${proveedor.email}">Email</td>
+                            <td th:text="${proveedor.phone}">Teléfono</td>
                         </tr>
                     </tbody>
                 </table>
