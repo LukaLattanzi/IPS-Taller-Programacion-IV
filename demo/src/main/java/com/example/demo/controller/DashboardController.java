@@ -3,7 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ClientRepository;
+import com.example.demo.repository.OrderDetailRepository;
+import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.PurchaseRepository;
+import com.example.demo.repository.SupplierRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +27,15 @@ public class DashboardController {
 
     @Autowired
     private PurchaseRepository purchaseRepository;
+
+    @Autowired
+    private SupplierRepository supplierRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
 
     /**
      * Maneja la solicitud GET para la página del dashboard.
@@ -44,6 +57,15 @@ public class DashboardController {
 
         // Agregar datos de compras
         model.addAttribute("compras", purchaseRepository.findAll());
+
+        // Agregar datos de proveedores
+        model.addAttribute("suppliers", supplierRepository.findAll());
+
+        // Agregar datos de pedidos
+        model.addAttribute("orders", orderRepository.findAll());
+
+        // Agregar datos de detalles de pedido
+        model.addAttribute("orderDetails", orderDetailRepository.findAll());
 
         // Renderizar la vista "dashboard.html"
         return "dashboard";
