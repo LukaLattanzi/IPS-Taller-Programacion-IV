@@ -1,23 +1,11 @@
--- --------------------------------------------
--- Configuración inicial de la base de datos
--- --------------------------------------------
-
--- Crear la base de datos si no existe
 CREATE DATABASE IF NOT EXISTS molienda_fina;
 
--- ⚠️ Eliminar la base de datos (solo para pruebas, cuidado en producción)
 DROP DATABASE molienda_fina;
 
--- Usar la base de datos creada
 USE molienda_fina;
 
--- Mostrar las tablas existentes (para verificar estructura)
 SHOW TABLES;
 
--- --------------------------------------------
--- Tabla: clientes
--- Descripción: Información personal y contacto de los clientes
--- --------------------------------------------
 CREATE TABLE clientes (
     cliente_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -28,10 +16,6 @@ CREATE TABLE clientes (
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- --------------------------------------------
--- Tabla: proveedores
--- Descripción: Datos de proveedores de productos
--- --------------------------------------------
 CREATE TABLE proveedores (
     proveedor_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre_empresa VARCHAR(255) NOT NULL,
@@ -40,21 +24,12 @@ CREATE TABLE proveedores (
     email VARCHAR(255)
 );
 
--- --------------------------------------------
--- Tabla: categorias
--- Descripción: Categorías a las que pertenecen los productos
--- --------------------------------------------
 CREATE TABLE categorias (
     categoria_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre_categoria VARCHAR(255) NOT NULL UNIQUE,
     descripcion TEXT
 );
 
--- --------------------------------------------
--- Tabla: productos
--- Descripción: Productos disponibles para la venta
--- Relación: Cada producto pertenece a una categoría
--- --------------------------------------------
 CREATE TABLE productos (
     producto_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -67,10 +42,6 @@ CREATE TABLE productos (
     CONSTRAINT FK_producto_categoria FOREIGN KEY (categoria_id) REFERENCES categorias(categoria_id)
 );
 
--- --------------------------------------------
--- Tabla: pedidos
--- Descripción: Registro de pedidos de clientes
--- --------------------------------------------
 CREATE TABLE pedidos (
     pedido_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     cliente_id BIGINT NOT NULL,
@@ -80,10 +51,6 @@ CREATE TABLE pedidos (
     CONSTRAINT FK_pedido_cliente FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
 );
 
--- --------------------------------------------
--- Tabla: detalles_pedido
--- Descripción: Línea de detalle de cada producto incluido en un pedido
--- --------------------------------------------
 CREATE TABLE detalles_pedido (
     detalle_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     pedido_id BIGINT NOT NULL,
@@ -94,10 +61,6 @@ CREATE TABLE detalles_pedido (
     CONSTRAINT FK_detalle_producto FOREIGN KEY (producto_id) REFERENCES productos(producto_id)
 );
 
--- --------------------------------------------
--- Tabla: compras
--- Descripción: Registra compras (reposición) de productos a proveedores
--- --------------------------------------------
 CREATE TABLE compras (
     compra_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     proveedor_id BIGINT NOT NULL,
@@ -109,9 +72,6 @@ CREATE TABLE compras (
     CONSTRAINT FK_compra_producto FOREIGN KEY (producto_id) REFERENCES productos(producto_id)
 );
 
--- --------------------------------------------
--- Consultas para verificar el contenido de las tablas
--- --------------------------------------------
 SELECT * FROM clientes;
 SELECT * FROM pedidos;
 SELECT * FROM productos;
@@ -120,9 +80,6 @@ SELECT * FROM proveedores;
 SELECT * FROM compras;
 SELECT * FROM categorias;
 
--- --------------------------------------------
--- TRIGGERS: Automatización de la lógica de stock y totales
--- --------------------------------------------
 
 -- 🔻 Resta stock cuando se inserta un nuevo detalle de pedido
 DELIMITER $$
@@ -138,7 +95,7 @@ END$$
 
 DELIMITER ;
 
--- 🔼 Suma stock cuando se hace una nueva compra (reposiciona)
+-- 🔼 Suma stock cuando se hace una nueva compra
 DELIMITER $$
 
 CREATE TRIGGER sumar_stock_compra
@@ -170,15 +127,10 @@ END$$
 
 DELIMITER ;
 
--- --------------------------------------------
--- Índices para mejorar el rendimiento de consultas
--- --------------------------------------------
 CREATE INDEX idx_detalle_pedido ON detalles_pedido(pedido_id);
 CREATE INDEX idx_detalle_producto ON detalles_pedido(producto_id);
 
--- --------------------------------------------
 -- 🔄 Trigger para actualizar automáticamente el total del pedido
--- --------------------------------------------
 DELIMITER $$
 
 CREATE TRIGGER actualizar_total_pedido
