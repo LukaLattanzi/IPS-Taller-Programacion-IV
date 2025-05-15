@@ -2,6 +2,7 @@ package com.moliendafina.backend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.math.BigDecimal;
 
@@ -35,5 +36,6 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "FK_producto_categoria"))
+    @JsonBackReference
     private Category category;
 }
