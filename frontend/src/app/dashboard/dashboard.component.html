@@ -4,71 +4,204 @@
     <!-- Navegación por pestañas -->
     <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos"
-                type="button" role="tab" aria-controls="productos" aria-selected="true">Productos</button>
+            <button class="nav-link active" id="categorias-tab" data-bs-toggle="tab" data-bs-target="#categorias"
+                type="button" role="tab" aria-controls="categorias" aria-selected="true">Categorías</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="categorias-tab" data-bs-toggle="tab" data-bs-target="#categorias"
-                type="button" role="tab" aria-controls="categorias" aria-selected="false">Categorías</button>
+            <button class="nav-link" id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos" type="button"
+                role="tab" aria-controls="productos" aria-selected="false">Productos</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes" type="button"
+                role="tab" aria-controls="clientes" aria-selected="false">Clientes</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="proveedores-tab" data-bs-toggle="tab" data-bs-target="#proveedores"
+                type="button" role="tab" aria-controls="proveedores" aria-selected="false">Proveedores</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="compras-tab" data-bs-toggle="tab" data-bs-target="#compras" type="button"
+                role="tab" aria-controls="compras" aria-selected="false">Compras</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pedidos-tab" data-bs-toggle="tab" data-bs-target="#pedidos" type="button"
+                role="tab" aria-controls="pedidos" aria-selected="false">Pedidos</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="detalles-tab" data-bs-toggle="tab" data-bs-target="#detalles" type="button"
+                role="tab" aria-controls="detalles" aria-selected="false">Detalles de Pedido</button>
         </li>
     </ul>
 
     <!-- Contenido de las pestañas -->
     <div class="tab-content mt-4" id="dashboardTabsContent">
-        <!-- Productos -->
-        <div class="tab-pane fade show active" id="productos" role="tabpanel" aria-labelledby="productos-tab">
-            <h2>Productos</h2>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-hover table-bordered">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Precio</th>
-                                <th>Stock</th>
-                                <th>Categoría</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let prod of products">
-                                <td>{{ prod.id }}</td>
-                                <td>{{ prod.name }}</td>
-                                <td>{{ prod.description }}</td>
-                                <td>{{ prod.price | currency }}</td>
-                                <td>{{ prod.stock }}</td>
-                                <td>{{ prod.category?.name || 'Sin categoría' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <!-- Categorías -->
+        <div class="tab-pane fade show active" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
+            <h2>Categorías</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of categories">
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.description }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- Categorías -->
-        <div class="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
-            <h2>Categorías</h2>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-hover table-bordered">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let cat of categories">
-                                <td>{{ cat.id }}</td>
-                                <td>{{ cat.name }}</td>
-                                <td>{{ cat.description }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <!-- Productos -->
+        <div class="tab-pane fade" id="productos" role="tabpanel" aria-labelledby="productos-tab">
+            <h2>Productos</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Categoría</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price | currency }}</td>
+                        <td>{{ product.stock }}</td>
+                        <td>{{ product.category?.name || 'Sin categoría' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Clientes -->
+        <div class="tab-pane fade" id="clientes" role="tabpanel" aria-labelledby="clientes-tab">
+            <h2>Clientes</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of clients">
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.phone }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Proveedores -->
+        <div class="tab-pane fade" id="proveedores" role="tabpanel" aria-labelledby="proveedores-tab">
+            <h2>Proveedores</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre de la Empresa</th>
+                        <th>Contacto</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let supplier of suppliers">
+                        <td>{{ supplier.id }}</td>
+                        <td>{{ supplier.companyName }}</td>
+                        <td>{{ supplier.contactName }}</td>
+                        <td>{{ supplier.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Compras -->
+        <div class="tab-pane fade" id="compras" role="tabpanel" aria-labelledby="compras-tab">
+            <h2>Compras</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Proveedor</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Costo Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let purchase of purchases">
+                        <td>{{ purchase.id }}</td>
+                        <td>{{ purchase.supplier?.companyName }}</td>
+                        <td>{{ purchase.product?.name }}</td>
+                        <td>{{ purchase.quantity }}</td>
+                        <td>{{ purchase.unitCost | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pedidos -->
+        <div class="tab-pane fade" id="pedidos" role="tabpanel" aria-labelledby="pedidos-tab">
+            <h2>Pedidos</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.client?.name }}</td>
+                        <td>{{ order.orderDate }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.total | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Detalles de Pedido -->
+        <div class="tab-pane fade" id="detalles" role="tabpanel" aria-labelledby="detalles-tab">
+            <h2>Detalles de Pedido</h2>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Pedido</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detail of orderDetails">
+                        <td>{{ detail.id }}</td>
+                        <td>{{ detail.order?.id }}</td>
+                        <td>{{ detail.product?.name }}</td>
+                        <td>{{ detail.quantity }}</td>
+                        <td>{{ detail.unitPrice | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

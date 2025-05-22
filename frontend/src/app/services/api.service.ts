@@ -17,4 +17,24 @@ export class ApiService {
   getProducts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/products`);
   }
+
+  getClients(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/clients`);
+  }
+  
+  getSuppliers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/suppliers`);
+  }
+  
+  getPurchases(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/purchases`);
+  }
+  
+  getOrders(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/orders`);
+  }
+  
+  getOrderDetails(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/order-details`);
+  }
 }
