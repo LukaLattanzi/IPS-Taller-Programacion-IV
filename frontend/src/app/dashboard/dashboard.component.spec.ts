@@ -74,7 +74,8 @@ export class DashboardComponent implements OnInit {
   loadOrderDetails(): void {
     this.apiService.getOrderDetails().subscribe({
       next: (data) => (this.orderDetails = data || []),
-      error: (error) => console.error('Error al cargar detalles de pedido:', error),
+      error: (error) =>
+        console.error('Error al cargar detalles de pedido:', error),
     });
   }
 }
